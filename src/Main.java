@@ -1,10 +1,23 @@
 
+import javax.swing.*;
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String nomeDoArquivo = "romances-blake-crouch.txt";
-        imprimirArquivosNoConsole(nomeDoArquivo);
+        try {
+            imprimirArquivosNoConsole(nomeDoArquivo);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                    "Revise o nome do artigo que você deseja imprimir! " + e.getCause());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,
+            "Ocorreu um erro inesperado! Entre em contato com o suporte! " + e.getCause());
+            e.printStackTrace();
+        } finally {
+            System.out.println("Chegou no finally");
+        }
 
         System.out.println("Apesar da exception ou não, o programa continua...");
     }
